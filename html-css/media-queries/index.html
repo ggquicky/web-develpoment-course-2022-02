@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Media Queries</title>
+    <style>
+      * {
+        margin: 0;
+      }
+
+      body {
+        align-items: center;
+        display: flex;
+        height: 100vh;
+        justify-content: center;
+      }
+
+      .box {
+        align-items: center;
+        background-color: aqua;
+        display: flex;
+        height: 200px;
+        justify-content: center;
+        position: relative;
+        width: 200px;
+      }
+
+      @media (hover: hover) and (pointer: fine) {
+        .box:hover {
+          background-color: pink;
+        }
+      }
+
+      .box:before {
+        border-color: black transparent transparent;
+        border-style: solid;
+        border-width: 20px;
+        content: " ";
+        inset-block-end: -40px;
+        inset-inline-start: 20px;
+        position: absolute;
+      }
+
+      @media (orientation: portrait) {
+      }
+      @media (orientation: landscape) {
+      }
+
+      @media screen and (min-width: 1000px) {
+        .box {
+          background-color: green;
+          height: 400px;
+          width: 400px;
+        }
+      }
+
+      @media (min-width: 1200px) and (max-width: 1300px) {
+        .box {
+          background-color: blue;
+          height: 400px;
+          width: 400px;
+        }
+      }
+
+      .box .inner {
+        height: 20px;
+        width: 60px;
+      }
+
+      .box .inner:before {
+        content: "before ";
+      }
+
+      .box .inner:after {
+        content: attr(data-title);
+      }
+    </style>
+  </head>
+  <body>
+    <div href="/">Antes</div>
+    <div class="box" href="/">
+      <p class="inner" data-title="Titulo"></p>
+      <div class="inner" title="Titulo 2">DIV 1</div>
+      <div class="inner">DIV 2</div>
+    </div>
+  </body>
+</html>

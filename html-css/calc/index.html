@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calc</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --header-height: 80px;
+        --footer-height: 60px;
+      }
+
+      .container {
+        font-size: 40px;
+      }
+
+      .header {
+        --hue: 262deg;
+
+        background-color: hsl(calc(var(--hue) - 50deg) 52% 47%);
+        height: var(--header-height);
+      }
+
+      .main {
+        background-color: aqua;
+        height: calc(100vh - (var(--header-height) + var(--footer-height)));
+      }
+
+      .footer {
+        background-color: aquamarine;
+        height: var(--footer-height);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="header">Header</div>
+      <div class="main">Main</div>
+      <div class="footer">Footer</div>
+    </div>
+  </body>
+</html>

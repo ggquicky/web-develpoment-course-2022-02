@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Variables</title>
+
+    <style>
+      :root {
+        --hue: 300;
+        --intensity: 100% 50%;
+        --bg-color: hsl(var(--hue) var(--intensity));
+        --box-size: 200px;
+      }
+
+      @media (min-width: 1200px) {
+        :root {
+          --bg-color: #0f0;
+          --box-size: 400px;
+        }
+      }
+
+      /* @property --bg-color {
+        initial-value: black;
+        inherits: false;
+        syntax: "<color>";
+      } */
+
+      .parent {
+      }
+
+      .box {
+        border: 4px solid;
+        font-size: 32px;
+        height: var(--box-size);
+        width: var(--box-size);
+      }
+
+      .box1 {
+        background-color: var(--bg-color);
+
+        --bg-color: #ff0;
+      }
+
+      .box1 .child {
+        background-color: var(--bg-color);
+      }
+
+      .box2 {
+        background-color: var(--bg-color, #0ff);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="parent">
+      <div class="box box1">
+        <div>BOX 1</div>
+        <div class="child">CHILD</div>
+      </div>
+      <div class="box box2">BOX 2</div>
+    </div>
+  </body>
+</html>

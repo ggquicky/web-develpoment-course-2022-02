@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Select With Icon</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      input {
+        appearance: none;
+      }
+
+      body {
+        padding: 40px;
+      }
+
+      input::-webkit-input-placeholder {
+        color: red;
+      }
+
+      .wrapper {
+        background-color: #f2f3f3;
+        border-radius: 8px;
+        overflow: hidden;
+        position: relative;
+        width: 190px;
+      }
+
+      select {
+        appearance: none;
+        border: none;
+        background-color: transparent;
+        font-size: 16px;
+        font-weight: 600;
+        height: 42px;
+        outline: none;
+        padding-block: 12px;
+        padding-inline: 16px;
+      }
+
+      .icon {
+        inset-block-start: 50%;
+        inset-inline-end: 16px;
+        position: absolute;
+        transform: translateY(-50%);
+        pointer-events: none;
+      }
+
+      /* select:after { 
+        content: "sdf";
+        border-color: red;
+        border-style: solid;
+        border-width: 20px;
+        inset-inline: 0;
+        position: absolute;
+        width: 40px;
+        height: 40px;
+      } */
+    </style>
+  </head>
+
+  <body>
+    <input placeholder="test" />
+    <br />
+    <br />
+    <br />
+    <div class="wrapper">
+      <select>
+        <option>Newest Releases</option>
+        <option>Lorem ipsum dolor sit amet</option>
+      </select>
+      <svg
+        class="icon"
+        width="14"
+        height="8"
+        viewBox="0 0 14 8"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M1 1L7 7L13 1"
+          stroke="black"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </div>
+  </body>
+</html>
