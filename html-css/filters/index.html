@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Filters</title>
+    <style>
+      :root {
+        --image-src: url("");
+      }
+
+      body {
+        align-items: center;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        margin: 0;
+        min-height: 100vh;
+        padding: 0;
+        min-width: 100vw;
+      }
+
+      img {
+        filter: brightness(150%) contrast(150%) saturate(50%) sepia(100%);
+        inset: 0;
+        position: absolute;
+      }
+
+      .box {
+        align-items: center;
+        /* background-color: hsl(0 0% 100% / 0.5); */
+        display: flex;
+        /* filter: drop-shadow(0px 0px 8px red); */
+        /* filter: grayscale(1); */
+        backdrop-filter: grayscale(1);
+        /* font-size: 40px; */
+        height: 200px;
+        justify-content: center;
+        width: 200px;
+        inset-block: 0;
+        inset-inline: 0;
+        position: absolute;
+      }
+    </style>
+  </head>
+
+  <body>
+    <img
+      src="https://images.unsplash.com/photo-1645438111875-50d980e193de?auto=format&fit=crop&w=400&h=400"
+    />
+    <div class="box">Box</div>
+  </body>
+</html>

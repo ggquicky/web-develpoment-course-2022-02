@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Box Shadow</title>
+    <style>
+      body {
+        align-items: center;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 0;
+        min-height: 100vh;
+        padding: 0;
+      }
+
+      .container {
+        background-color: antiquewhite;
+        height: 400px;
+        position: relative;
+        width: 400px;
+
+        /* box-shadow: inset -32px -32px 40px hsl(0 0% 0% / 0.5),
+          32px 32px 4px rgba(41, 18, 172, 0.5),
+          64px 64px 4px rgba(102, 0, 71, 0.5); */
+
+        filter: drop-shadow(0px 0px 8px hsl(0 0% 0% / 0.5));
+      }
+
+      .circle {
+        background-color: pink;
+        border: 16px solid antiquewhite;
+        border-radius: 50%;
+        height: 80px;
+        inset-block-start: 0;
+        inset-inline-end: 0;
+        position: absolute;
+        transform: translate(50%, -50%);
+        width: 80px;
+        /* box-shadow: 0px 0px 32px hsl(0 0% 0% / 0.5); */
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="circle"></div>
+    </div>
+  </body>
+</html>

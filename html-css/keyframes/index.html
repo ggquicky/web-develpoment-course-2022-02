@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Keyframe</title>
+    <style>
+      body {
+        align-items: center;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        margin: 0;
+        min-height: 100vh;
+        padding: 0;
+      }
+
+      @keyframes slide-in {
+        0% {
+          background-color: antiquewhite;
+          /* transform: rotate(0) scale(0); */
+          transform: translateX(calc((50vw + 50%) * -1));
+        }
+
+        50% {
+          background-color: aqua;
+        }
+
+        100% {
+          background-color: blueviolet;
+          /* transform: rotate(1turn) scale(1); */
+          transform: translateX(0);
+        }
+      }
+
+      .box {
+        background-color: antiquewhite;
+        font-size: 32px;
+        padding: 32px;
+        width: 400px;
+
+        animation: slide-in 3s alternate;
+        animation-iteration-count: infinite;
+        transform-origin: top left;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="box">Box</div>
+  </body>
+</html>
