@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gradients</title>
+    <style>
+      body {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      .box {
+        border: 2px solid;
+        height: 400px;
+        width: 400px;
+      }
+
+      .linear {
+        background-image: linear-gradient(
+          to bottom,
+          #ff0 0%,
+          #ff0 29.9%,
+          #0f0 30%,
+          #0f0 59.9%,
+          #00f 60%,
+          #00f 100%
+        );
+      }
+
+      .radial {
+        background-image: radial-gradient(
+          #ff0 0%,
+          #ff0 29.9%,
+          #0f0 30%,
+          #0f0 59.9%,
+          #00f 60%,
+          #00f 100%
+        );
+      }
+
+      .conic {
+        border-radius: 50%;
+        /* background-image: conic-gradient(
+          from 0deg at 50% 50%,
+          #ff0,
+          #0f0,
+          #00f
+        ); */
+        background-image: conic-gradient(
+          hsl(0deg 0% 90%),
+          hsl(0deg 0% 100%),
+          hsl(0deg 0% 30%),
+          hsl(0deg 0% 80%),
+          hsl(0deg 0% 50%),
+          hsl(0deg 0% 90%),
+          hsl(0deg 0% 100%),
+          hsl(0deg 0% 30%),
+          hsl(0deg 0% 80%),
+          hsl(0deg 0% 50%),
+          hsl(0deg 0% 90%)
+        );
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="box linear"></div>
+    <br />
+    <br />
+    <div class="box radial"></div>
+    <br />
+    <br />
+    <div class="box conic"></div>
+  </body>
+</html>
