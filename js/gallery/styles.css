@@ -1,0 +1,86 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: center;
+  margin-inline: auto;
+  width: 1000px;
+}
+
+.main-image-container {
+  height: 600px;
+  position: relative;
+  width: 1000px;
+}
+
+.loading-container {
+  align-items: center;
+  background-color: hsl(0 0% 100% / 0.75);
+  display: none; /* flex */
+  justify-content: center;
+  inset: 0;
+  position: absolute;
+}
+
+.main-image {
+  border-radius: 8px;
+  display: none;
+  object-fit: cover;
+}
+
+.add-image-button {
+  display: none;
+  font-size: 24px;
+  margin-block-start: 32px;
+  padding-block: 16px;
+}
+
+.images {
+  display: flex;
+  gap: 16px;
+  margin-block-start: 32px;
+  overflow-x: scroll;
+  position: relative;
+}
+
+.image-container {
+  border-radius: 8px;
+  flex-shrink: 0;
+  height: 80px;
+  overflow: hidden;
+  position: relative;
+  width: 80px;
+}
+
+.image-container.active:after {
+  border: 2px solid hsl(281 100% 24%);
+  background-color: hsl(281 100% 24% / 0.35);
+  content: " ";
+  inset: 0;
+  position: absolute;
+}
+
+.image {
+  height: inherit;
+  object-fit: cover;
+  width: inherit;
+}
+
+.gradient {
+  background-image: linear-gradient(
+    to right,
+    hsl(0 0% 100% / 0.1),
+    hsl(0 0% 100%)
+  );
+  inset-block-end: 0;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+  position: absolute;
+  width: 80px;
+}
