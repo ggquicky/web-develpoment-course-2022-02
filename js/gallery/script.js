@@ -28,41 +28,23 @@ imagesContainerEl.addEventListener("click", function (e) {
   image.parentElement.classList.add("active");
 });
 
-const addImageButtonEl = document.querySelector(".add-image-button");
-
-addImageButtonEl.addEventListener("click", function () {
-  const imageContainerEl = document.createElement("div");
-  imageContainerEl.classList.add("image-container");
-
-  const imageEl = document.createElement("img");
-  imageEl.classList.add("image");
-  imageEl.dataset.url = "https://picsum.photos/id/4/1000/600";
-  imageEl.src = "https://picsum.photos/id/4/200/200";
-
-  imageContainerEl.appendChild(imageEl);
-
-  imagesContainerEl.appendChild(imageContainerEl);
-});
-
 function changeUrlImageSize(url, width, height = width) {
+  const { devicePixelRatio } = window;
   const arr = url.split("/");
 
   arr.splice(
     -2,
     2,
-    width * window.devicePixelRatio,
-    height * window.devicePixelRatio
+    width * devicePixelRatio ?? 1,
+    height * devicePixelRatio ?? 1
   );
 
   return arr.join("/");
 }
 
-function getImages(url) {
-  return [changeUrlImageSize(url, 80), changeUrlImageSize(url, 1000, 600)];
-}
-
 function createImage(url) {
-  const [smallImage, bigImage] = getImages(url);
+  const smallImage = changeUrlImageSize(url, 80);
+  const bigImage = changeUrlImageSize(url, 1000, 600);
 
   const imageContainerEl = document.createElement("div");
   imageContainerEl.classList.add("image-container");
@@ -77,17 +59,27 @@ function createImage(url) {
   return imageContainerEl;
 }
 
-fetch("https://picsum.photos/v2/list?limit=20")
+fetch(
+  `https://picsum.photos/v2/list?limit=20&page=${Math.floor(
+    Math.random() * 21
+  )}`
+)
   .then(function (resp) {
     return resp.json();
   })
-  .then(function (data) {
-    const firstImage = data[0];
+  .then(function (images) {
+    const firstImage = images[0];
 
     mainImageEl.style.display = "block";
-    mainImageEl.src = getImages(firstImage.download_url)[1];
+    mainImageEl.src = changeUrlImageSize(firstImage.download_url, 1000, 600);
 
-    data.forEach(function (image) {
+    // imagesContainerEl
+    //   .querySelectorAll(".image-container")
+    //   .forEach(function (el) {
+    //     el.remove();
+    //   });
+
+    images.forEach(function (image) {
       const imageEl = createImage(image.download_url);
 
       imagesContainerEl.appendChild(imageEl);
