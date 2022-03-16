@@ -1,22 +1,19 @@
 <?php
 
-class UserController {
+require_once __DIR__.'/Controller.php';
+require_once __DIR__.'/Controller2.php';
+require_once __DIR__.'/ControllerMethodsInterface.php';
+
+use Controllers\{Controller,Controller2,ControllerMethodsInterface};
+
+class UserController extends Controller implements ControllerMethodsInterface {
+    use Controller2;
+
     protected array $urls = [
         '/users' => 'index',
         '/users/1' => 'show',
         '/users/1/edit' => 'edit',
     ];
-
-    public function load(string $uri): void
-    {
-        $method = $this->urls[$uri] ?? null;
-
-        if (! $method) {
-            throw new Exception('Method not found.');
-        }
-
-        $this->$method();
-    }
 
     public function edit()
     {
@@ -30,6 +27,8 @@ class UserController {
 
     public function index()
     {
+        $this->log();
+
         $users = [
             [
                 'first_name' => 'Hosmel',

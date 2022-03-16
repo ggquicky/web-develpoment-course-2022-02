@@ -1,9 +1,11 @@
 <?php
 
-class IndexController {
-    protected array $urls = [
-        '' => 'index',
-    ];
+namespace Controllers;
+
+abstract class Controller {
+    protected array $urls = [];
+
+    abstract public function index();
 
     public function load(string $uri): void
     {
@@ -15,11 +17,4 @@ class IndexController {
 
         $this->$method();
     }
-
-    public function index()
-    {
-        require_once __DIR__.'/../views/index.view.php';
-    }
-};
-
-return new IndexController();
+}
