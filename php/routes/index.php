@@ -2,8 +2,6 @@
 
 require_once './Router.php';
 
-var_dump(Router::class);
-
 $router = new Router(
     [
         '' => 'controllers/index.controller.php',
