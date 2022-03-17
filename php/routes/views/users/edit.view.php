@@ -1,3 +1,6 @@
 <h1>Editing user</h1>
 
-<h2><?php echo "{$user['first_name']} {$user['last_name']}" ?></h2>
+<form action="/users/1/update" method="post">
+    <input name="name" type="text" value="<?php echo $user['first_name'] ?>">
+    <button type="submit">Update</button>
+</form>

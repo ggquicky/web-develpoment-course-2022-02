@@ -1,0 +1,15 @@
+{% extends "layouts/main.html" %}
+
+{% block header %}
+<h1>Home</h1>
+{% endblock %}
+
+{% block content %}
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum exercitationem labore magni officia officiis pariatur quam sit vitae! Aliquam doloribus facere harum natus officiis praesentium quidem quos saepe voluptas voluptate!</p>
+
+<form action="/users" method="post">
+    <input name="first_name" type="text">
+    <button type="submit">Save</button>
+</form>
+{% endblock %}
+

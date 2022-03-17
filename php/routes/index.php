@@ -8,6 +8,7 @@ $router = new Router(
         '/users' => 'controllers/UserController.php',
         '/users/1' => 'controllers/UserController.php',
         '/users/1/edit' => 'controllers/UserController.php',
+        '/users/1/update' => 'controllers/UserController.php',
     ]
 );
 

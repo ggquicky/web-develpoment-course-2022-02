@@ -13,6 +13,7 @@ class UserController extends Controller implements ControllerMethodsInterface {
         '/users' => 'index',
         '/users/1' => 'show',
         '/users/1/edit' => 'edit',
+        '/users/1/update' => 'update',
     ];
 
     public function edit()
@@ -23,6 +24,14 @@ class UserController extends Controller implements ControllerMethodsInterface {
         ];
 
         require_once __DIR__.'/../views/users/edit.view.php';
+    }
+
+    public function update()
+    {
+        $data = $_POST;
+
+        header('Location: /');
+        die;
     }
 
     public function index()
