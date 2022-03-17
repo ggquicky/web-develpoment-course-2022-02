@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Specificity</title>
+    <style>
+      body {
+        font-size: 40px;
+      }
+
+      #box.box {
+        color: red;
+      }
+
+      #box {
+        color: aqua;
+      }
+
+      /* div.box {
+        color: blue;
+      }
+
+      .box:not(.asdasd) {
+        color: blueviolet;
+      } */
+
+      .box {
+        color: red;
+      }
+    </style>
+  </head>
+  <!--          inline(1) - id(1) - class(1) - element(1) -->
+  <!-- inline:     1          0        0           0 -->
+  <!-- id:         0          1        0           0 -->
+  <!-- class:      0          0        1           0 -->
+  <body>
+    <div class="box" title="hola" id="box">Test</div>
+    <div data-id="1" class="box" id="box">Test</div>
+  </body>
+</html>
