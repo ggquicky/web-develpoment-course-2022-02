@@ -7,7 +7,8 @@
 {% block content %}
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum exercitationem labore magni officia officiis pariatur quam sit vitae! Aliquam doloribus facere harum natus officiis praesentium quidem quos saepe voluptas voluptate!</p>
 
-<form action="/users" method="post">
+<form action="/users/1" method="post">
+    <input name="_METHOD" type="hidden" value="PATCH">
     <input name="first_name" type="text">
     <button type="submit">Save</button>
 </form>
