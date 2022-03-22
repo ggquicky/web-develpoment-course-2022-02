@@ -2,6 +2,9 @@
 
 require __DIR__.'/vendor/autoload.php';
 
+require_once __DIR__.'/Controllers/HomeController.php';
+
+use Controllers\HomeController;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
@@ -15,13 +18,7 @@ $twig = Twig::create('views', ['cache' => false]);
 $app->add(TwigMiddleware::create($app, $twig));
 $app->add(new MethodOverrideMiddleware());
 
-$app->get('/', function (Request $request, Response $response, $args) {
-    $view = Twig::fromRequest($request);
-
-    return $view->render($response, 'index.html', [
-        'name' => 'Hosmel',
-    ]);
-});
+$app->get('/', [HomeController::class, 'index']);
 
 $app->get('/users', function (Request $request, Response $response, $args) {
     $view = Twig::fromRequest($request);
