@@ -14,6 +14,7 @@ class TodoResource extends JsonResource
             'id' => $this->id,
             'text' => $this->text,
             'updated_at' => $this->updated_at,
+            'user' => UserResource::make($this->whenLoaded('user')),
         ];
     }
 }

@@ -8,12 +8,15 @@ use App\Http\Resources\TodoResource;
 use App\Models\Todo;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Validation\Rule;
 
 class TodoController extends Controller
 {
     public function index()
     {
-        $todos = Todo::query()->paginate();
+        $todos = Todo::query()
+            ->with('user')
+            ->paginate();
 
         return new TodoCollection($todos);
     }
@@ -27,12 +30,15 @@ class TodoController extends Controller
         $data = $request->validate(
             [
                 'text' => ['required'],
+                'user_id' => ['required', Rule::exists('users', 'id')]
             ]
         );
 
-        $todo = Todo::create($data);
+        $todo = Todo::create($data)->fresh();
 
-        return TodoResource::make($todo->fresh());
+        $todo->load('user');
+
+        return TodoResource::make($todo);
     }
 
     public function show(Todo $todo)
@@ -49,10 +55,12 @@ class TodoController extends Controller
             [
                 'completed' => ['sometimes', 'required', 'bool'],
                 'text' => ['sometimes', 'required'],
+                'user_id' => ['sometimes', 'required', Rule::exists('users', 'id')]
             ]
         );
 
         $todo->update($data);
+        $todo->load('user');
 
         return TodoResource::make($todo);
     }

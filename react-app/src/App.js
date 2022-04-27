@@ -1,5 +1,5 @@
 import ky from 'ky'
-import {useEffect, useState} from 'react'
+import {useCallback, useEffect, useState} from 'react'
 
 import {TodoForm} from './components/TodoForm/TodoForm.js'
 import {TodoList} from './components/TodoList/TodoList.js'
@@ -15,11 +15,12 @@ export default function App() {
       })
   }, [])
 
-  async function handleSubmit(text) {
+  async function handleSubmit({text, userId}) {
     const resp = await ky
       .post('http://localhost:8000/api/todos', {
         json: {
           text,
+          user_id: userId,
         },
       })
       .json()
@@ -27,11 +28,12 @@ export default function App() {
     setTodos((todos) => [...todos, resp.data])
   }
 
-  async function handleToggle(id, completed) {
+  const handleUpdate = useCallback(async (id, data) => {
     const resp = await ky
       .patch(`http://localhost:8000/api/todos/${id}`, {
         json: {
-          completed,
+          ...data,
+          user_id: data.userId,
         },
       })
       .json()
@@ -39,25 +41,28 @@ export default function App() {
     setTodos((todos) => {
       return todos.map((todo) => {
         if (todo.id === id) {
-          return resp.data
+          return {
+            ...todo,
+            ...resp.data,
+          }
         }
 
         return todo
       })
     })
-  }
+  }, [])
 
-  async function handleDelete(id) {
+  const handleDelete = useCallback(async (id) => {
     await ky.delete(`http://localhost:8000/api/todos/${id}`).json()
 
     setTodos((todos) => todos.filter((todo) => todo.id !== id))
-  }
+  }, [])
 
   return (
     <div>
       <TodoForm onSubmit={handleSubmit} />
       <br />
-      <TodoList onDelete={handleDelete} onToggle={handleToggle} todos={todos} />
+      <TodoList onDelete={handleDelete} onUpdate={handleUpdate} todos={todos} />
     </div>
   )
 }
