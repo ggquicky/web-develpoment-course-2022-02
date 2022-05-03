@@ -1,36 +1,13 @@
-import ky from 'ky'
-import {useEffect, useState} from 'react'
+import {useQuery} from 'react-query'
 import {useNavigate} from 'react-router-dom'
+
+import {Skeleton, SkeletonCircle, Stack} from '@chakra-ui/react'
+
+import ky from '../../utils/ky.js'
 
 export function Home() {
   const navigate = useNavigate()
-  const [loading, setLoading] = useState(true)
-  const [user, setUser] = useState(null)
-
-  useEffect(() => {
-    const accessToken = localStorage.getItem('access_token')
-
-    ky.get(`${process.env.REACT_APP_API_URL}/user`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    })
-      .json()
-      .then((resp) => {
-        setUser(resp)
-      })
-      .catch((err) => {
-        localStorage.removeItem('access_token')
-        navigate('/login')
-      })
-      .finally(() => {
-        setLoading(false)
-      })
-  }, [navigate])
-
-  if (loading) {
-    return <div>Loading app..</div>
-  }
+  const {data: user} = useQuery('viewer', () => ky.get('user').json())
 
   if (!user) {
     return null
@@ -39,7 +16,7 @@ export function Home() {
   return (
     <div className="p-8">
       <div className="flex justify-between">
-        <h1>Home</h1>
+        <h1>{user.name}</h1>
         <button onClick={handleLogout}>Logout</button>
       </div>
     </div>
@@ -50,4 +27,20 @@ export function Home() {
 
     navigate('/login')
   }
+}
+
+export function HomeSkeleton() {
+  return (
+    <Stack spacing="4">
+      {Array.from(Array(5).keys()).map((i) => (
+        <Stack alignItems="center" direction="row" key={i}>
+          <SkeletonCircle boxSize="32px" />
+          <Stack spacing="2">
+            <Skeleton height="2" width="40" />
+            <Skeleton height="1" width="40" />
+          </Stack>
+        </Stack>
+      ))}
+    </Stack>
+  )
 }

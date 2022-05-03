@@ -14,5 +14,11 @@
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
         "postcss": "^8.1.14"
+    },
+    "dependencies": {
+        "@chakra-ui/react": "^1.8.8",
+        "@emotion/react": "^11.9.0",
+        "@emotion/styled": "^11.8.1",
+        "framer-motion": "^6.3.2"
     }
 }

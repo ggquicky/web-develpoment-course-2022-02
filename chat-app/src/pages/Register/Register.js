@@ -2,13 +2,24 @@ import {FastField, Form, Formik} from 'formik'
 import ky from 'ky'
 import {useNavigate} from 'react-router-dom'
 
+import {
+  Button,
+  Container,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Heading,
+  Input,
+  Stack,
+} from '@chakra-ui/react'
+
 import {buildFormikErrors} from '../../utils/build-formik-errors.js'
 
 export function Register() {
   const navigate = useNavigate()
 
   return (
-    <div className="p-8">
+    <Container maxWidth="container.lg">
       <Formik
         initialValues={{
           email: '',
@@ -17,22 +28,23 @@ export function Register() {
         }}
         onSubmit={handleSubmit}
       >
-        <Form className="flex flex-col space-y-4">
-          <h1>Register</h1>
+        <Stack as={Form} spacing="4">
+          <Heading as="h1" size="md">
+            Register
+          </Heading>
           <FastField name="name">
             {({field, meta}) => (
-              <div>
-                <input {...field} type="text" />
-                {!!meta.error && (
-                  <div className="text-red-500">{meta.error}</div>
-                )}
-              </div>
+              <FormControl isInvalid={!!meta.error}>
+                <FormLabel>Name</FormLabel>
+                <Input {...field} type="text" />
+                <FormErrorMessage>{meta.error}</FormErrorMessage>
+              </FormControl>
             )}
           </FastField>
           <FastField name="email">
             {({field, meta}) => (
               <div>
-                <input {...field} type="text" />
+                <Input {...field} type="text" />
                 {!!meta.error && (
                   <div className="text-red-500">{meta.error}</div>
                 )}
@@ -42,17 +54,19 @@ export function Register() {
           <FastField name="password">
             {({field, meta}) => (
               <div>
-                <input {...field} type="password" />
+                <Input {...field} type="password" />
                 {!!meta.error && (
                   <div className="text-red-500">{meta.error}</div>
                 )}
               </div>
             )}
           </FastField>
-          <button type="submit">Create</button>
-        </Form>
+          <Button colorScheme="blue" type="submit">
+            Create
+          </Button>
+        </Stack>
       </Formik>
-    </div>
+    </Container>
   )
 
   async function handleSubmit(values, formikBag) {
