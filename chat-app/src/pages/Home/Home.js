@@ -4,6 +4,7 @@ import {useNavigate} from 'react-router-dom'
 import {Skeleton, SkeletonCircle, Stack} from '@chakra-ui/react'
 
 import ky from '../../utils/ky.js'
+import {Profile} from './Profile.js'
 
 export function Home() {
   const navigate = useNavigate()
@@ -16,7 +17,7 @@ export function Home() {
   return (
     <div className="p-8">
       <div className="flex justify-between">
-        <h1>{user.name}</h1>
+        <Profile />
         <button onClick={handleLogout}>Logout</button>
       </div>
     </div>
