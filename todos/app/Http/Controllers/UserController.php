@@ -12,4 +12,15 @@ class UserController extends Controller
     {
         return UserCollection::make(User::query()->paginate());
     }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        $users = User::query()
+            ->where('name', 'like', "%$query%")
+            ->paginate();
+
+        return UserCollection::make($users);
+    }
 }
