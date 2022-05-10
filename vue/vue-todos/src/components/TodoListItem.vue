@@ -31,7 +31,7 @@
       </button>
       <button
         class="border border-red-700 ml-1 px-2 py-1 rounded"
-        @click="handleDeleteTodo(todo)"
+        @click="todosStore.delete(todo)"
       >
         Delete
       </button>
@@ -41,7 +41,9 @@
 
 <script setup>
 import { format } from "date-fns";
-import { inject, ref } from "vue";
+import { ref } from "vue";
+
+import { useTodosStore } from "../stores/todos.js";
 
 const props = defineProps({
   todo: {
@@ -50,17 +52,17 @@ const props = defineProps({
   },
 });
 
-const { handleDeleteTodo, handleUpdateTodo } = inject("todos");
+const todosStore = useTodosStore();
 
 const text = ref(props.todo.text);
 const isEditing = ref(false);
 
 function handleUpdateText() {
-  handleUpdateTodo(props.todo, { text: text.value });
+  todosStore.update(props.todo, { text: text.value });
   isEditing.value = false;
 }
 
 async function handleChange() {
-  handleUpdateTodo(props.todo, { completed: !props.todo.completed });
+  todosStore.update(props.todo, { completed: !props.todo.completed });
 }
 </script>

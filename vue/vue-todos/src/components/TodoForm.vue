@@ -1,52 +1,30 @@
 <template>
-  <form class="space-y-4" @submit.prevent="handleSubmit">
-    <input
-      class="rounded w-full"
-      ref="inputRef"
-      required
-      type="text"
-      v-model="values.text"
-    />
-    <!-- <select class="rounded w-full" required v-model="values.user_id">
-      <option>Select an user</option>
+  <FormKit :actions="false" type="form" v-model="values" @submit="handleSubmit">
+    <FormKit name="text" type="text" label="Task" validation="required" />
+    <FormKit name="user_id" type="select" label="User" validation="required">
       <option :key="user.id" :value="user.id" v-for="user in users">
         {{ user.name }}
       </option>
-    </select> -->
-    <input
-      class="rounded w-full"
-      list="ice-cream-flavors"
-      type="text"
-      v-model="searchText"
-    />
-    <datalist id="ice-cream-flavors">
-      <option :key="user.id" :value="user.id" v-for="user in users">
-        {{ user.name }}
-      </option>
-    </datalist>
-
+    </FormKit>
     <button
       class="border bg-blue-500 hover:bg-blue-700 mt-2 px-2 py-2 rounded text-white w-full"
       type="submit"
     >
       Create Todo
     </button>
-  </form>
+  </FormKit>
 </template>
 
 <script setup>
 import ky from "ky";
-import { onBeforeMount, ref, watch, watchEffect } from "vue";
+import { onBeforeMount, ref, watch } from "vue";
+
+import { useTodosStore } from "../stores/todos.js";
 
 const inputRef = ref(null);
 const users = ref([]);
 const searchText = ref("");
-const values = ref({
-  text: "",
-  user_id: "",
-});
-
-const emit = defineEmits(["submit"]);
+const values = ref({});
 
 onBeforeMount(async () => {
   const resp = await ky.get("http://localhost:8000/api/users").json();
@@ -54,10 +32,11 @@ onBeforeMount(async () => {
   users.value = resp.data;
 });
 
+const todosStore = useTodosStore();
+
 function handleSubmit() {
-  emit("submit", {
+  todosStore.create({
     ...values.value,
-    user_id: searchText.value,
   });
 
   values.value.text = "";
@@ -65,11 +44,6 @@ function handleSubmit() {
 
   inputRef.value.focus();
 }
-
-watchEffect(() => {
-  console.log(`watchEffect: `);
-  console.log(values.value);
-});
 
 watch(searchText, async () => {
   const resp = await ky
